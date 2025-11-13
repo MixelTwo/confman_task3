@@ -1,0 +1,17 @@
+- op: load_const
+  value: 600
+  dest_addr: "ten"
+
+- op: do_all
+  dest_addr: 2
+  src_addr: 139
+
+- op: write_mem
+  src_reg_addr: 11
+  dest_mem_reg_addr: 2
+  destiny: 2
+
+- op: bin_eq
+  result_base_reg_addr: 11
+  right_reg_addr: 0
+  offset: 9

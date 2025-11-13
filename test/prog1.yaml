@@ -1,0 +1,17 @@
+- op: load_const  # имя операции
+  value: 600      # операнд (зависит от операции)
+  dest_addr: 10   # операнд (зависит от операции)
+
+- op: read_mem
+  dest_addr: 2
+  src_addr: 139
+
+- op: write_mem
+  src_reg_addr: 11
+  dest_mem_reg_addr: 2
+
+- op: bin_eq
+  result_base_reg_addr: 11
+  left_mem_addr: 607
+  right_reg_addr: 0
+  offset: 9
