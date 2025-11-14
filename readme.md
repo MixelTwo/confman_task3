@@ -219,10 +219,42 @@ A        | B        | C          | D          | E
 
 ## Тесты
 
-```
-test\test1.bat
-test\test2.bat
-test\test3.bat
-test\test4.bat
-test\test5.bat
-```
+`test\test1.bat`
+
+![test1](docs/test1.png)
+
+`test\test2.bat`
+
+![test2](docs/test2.png)
+
+`test\test3.bat`
+
+![test3](docs/test3.png)
+
+![test3_mem](docs/test3_mem.png)
+
+`test\test4.bat`
+
+![test4](docs/test4.png)
+
+1. сравнение адресса 80 (со значением 127) с регистром 1 (со значением 127) и запись результата по адрессу 81 (80 + 1)
+2. сравнение адресса 81 (со значением 1) с регистром 1 (со значением 127) и запись результата по адрессу 82 (80 + 2)
+
+![test4_mem](docs/test4_mem.png)
+
+`test\test5.bat`
+
+![test5](docs/test5.png)
+
+сравнение вектора [2, 3, 4, 5, 6] по адрессу 160 с вектором [2, 2, 4, 4, 6] по адрессу 176
+
+![test5_1_mem](docs/test5_1_mem.png)
+
+сравнение вектора [10, 6, 10, 2, 9] по адрессу 160 с вектором [1, 6, 1, 2, 2] по адрессу 176
+
+![test5_2_mem](docs/test5_2_mem.png)
+
+сравнение вектора [8, 3, 2, 9, 8] по адрессу 160 с вектором [8, 8, 9, 2, 8] по адрессу 176
+
+![test5_3_mem](docs/test5_3_mem.png)
+
