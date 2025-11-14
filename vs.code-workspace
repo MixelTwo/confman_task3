@@ -21,7 +21,7 @@
                 "program": "interpret.py",
                 "console": "integratedTerminal",
                 // "args": ["-s", "test/prog1.yaml", "-o", "build/prog1", "-t"]
-                "args": ["-x", "build/prog2", "-d", "build/prog2.json", "-dr", "0-0xFF", "-t"]
+                "args": ["-x", "build/prog3", "-d", "build/prog3.json", "-dr", "0-0xFF", "-t"]
             }
         ]
     }

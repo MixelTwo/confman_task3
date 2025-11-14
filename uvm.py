@@ -36,7 +36,7 @@ class UVM:
 
     def init_test(self):
         for i in range(80, 85):
-            self.memory[i] = randint(0, 255)
+            self.memory[i] = randint(10, 255)
 
 
 class Registers:

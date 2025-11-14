@@ -1,4 +1,4 @@
-from typing import Any, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from uvm import UVM
@@ -165,4 +165,7 @@ class _(Operation):
         return self
 
     def execute(self, uvm: "UVM"):
-        pass
+        dest_addr = uvm.regs[self.result_base_reg_addr] + self.offset
+        left = uvm.memory[self.left_mem_addr]
+        right = uvm.regs[self.right_reg_addr]
+        uvm.memory[dest_addr] = 1 if left == right else 0
