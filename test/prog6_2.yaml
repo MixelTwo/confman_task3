@@ -1,0 +1,74 @@
+# r[1] <- 0 (counter)
+- op: load_const  # 3 bytes
+  value: 0
+  dest_addr: 1
+
+# r[A] <- 0 (acc)
+- op: load_const  # 3 bytes
+  value: 0
+  dest_addr: 10
+
+# r[2] <- 10 (end_value)
+- op: load_const  # 3 bytes
+  value: 10
+  dest_addr: 2
+
+# m[80] <- r[2](end_value)
+- op: load_const  # 3 bytes
+  value: 80
+  dest_addr: 3
+- op: write_mem   # 2 bytes
+  src_reg_addr: 2
+  dest_mem_reg_addr: 3
+
+# m[81] <- 1
+- op: load_const  # 3 bytes
+  value: 1
+  dest_addr: 3
+- op: load_const  # 3 bytes
+  value: 81
+  dest_addr: 4
+- op: write_mem   # 2 bytes
+  src_reg_addr: 3
+  dest_mem_reg_addr: 4
+
+# r[3] <- m[80] == r[1]
+- op: load_const  # 3 bytes
+  value: 96
+  dest_addr: 3
+- op: bin_eq      # 6 bytes
+  result_base_reg_addr: 3
+  left_mem_addr: 80
+  right_reg_addr: 1
+  offset: 0
+- op: read_mem    # 5 bytes
+  dest_addr: 3
+  src_addr: 96
+
+# CP <- END if r[3]
+- op: jump        # 5 bytes
+  chk_reg_addr: 3
+  jmp_mem_addr: 1024
+
+# r[1] <- r[1] + m[81](1)
+- op: sum         # 5 bytes
+  result_reg_addr: 1
+  left_mem_addr: 81
+  right_reg_addr: 1
+
+# r[A] <- r[A] + r[1]
+- op: load_const  # 3 bytes
+  value: 96
+  dest_addr: 3
+- op: write_mem   # 2 bytes
+  src_reg_addr: 1
+  dest_mem_reg_addr: 3
+- op: sum         # 5 bytes
+  result_reg_addr: 10
+  left_mem_addr: 96
+  right_reg_addr: 10
+
+# CP <- 19
+- op: jump        # 5 bytes
+  chk_reg_addr: 2
+  jmp_mem_addr: 22

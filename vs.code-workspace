@@ -20,8 +20,8 @@
                 // "program": "assembly.py",
                 "program": "interpret.py",
                 "console": "integratedTerminal",
-                // "args": ["-s", "test/prog1.yaml", "-o", "build/prog1", "-t"]
-                "args": ["-x", "build/prog3", "-d", "build/prog3.json", "-dr", "0-0xFF", "-t"]
+                // "args": ["-s", "test/prog6_2.yaml", "-o", "build/prog6_2", "-t"]
+                "args": ["-x", "build/prog6_2", "-d", "build/prog6_2.mem.json", "-dr", "0-0xFF"]
             }
         ]
     }

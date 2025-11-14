@@ -1,0 +1,28 @@
+- op: load_const
+  value: 5
+  dest_addr: 1
+
+- op: load_const
+  value: 1
+  dest_addr: 2
+
+- op: load_const
+  value: 64
+  dest_addr: 3
+
+- op: write_mem
+  src_reg_addr: 2
+  dest_mem_reg_addr: 3
+
+- op: sum
+  result_reg_addr: 1
+  left_mem_addr: 64
+  right_reg_addr: 1
+- op: sum
+  result_reg_addr: 1
+  left_mem_addr: 64
+  right_reg_addr: 1
+- op: sum
+  result_reg_addr: 1
+  left_mem_addr: 64
+  right_reg_addr: 1

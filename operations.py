@@ -169,3 +169,58 @@ class _(Operation):
         left = uvm.memory[self.left_mem_addr]
         right = uvm.regs[self.right_reg_addr]
         uvm.memory[dest_addr] = 1 if left == right else 0
+
+
+class _(Operation):
+    name = "sum"
+    op = 13
+    left_mem_addr: int
+    right_reg_addr: int
+    result_reg_addr: int
+
+    def to_bytes(self) -> bytes:
+        word = 0
+        word |= self.op & 0b111111                      # A bits 0–5
+        word |= (self.result_reg_addr & 0xF) << 6       # B bits 6–9 (4 bits)
+        word |= (self.left_mem_addr & 0x3FFFFFF) << 10  # C bits 10–35 (26 bits)
+        word |= (self.right_reg_addr & 0xF) << 36       # D bits 36–39 (4 bits)
+        return word.to_bytes(5, "little")
+
+    def from_bytes(self, uvm: "UVM"):
+        word = uvm.get_word(5)
+        w = int.from_bytes(word, "little")
+        self.result_reg_addr = (w >> 6) & 0xF       # 4 bits (B)
+        self.left_mem_addr = (w >> 10) & 0x3FFFFFF  # 26 bits (C)
+        self.right_reg_addr = (w >> 36) & 0xF       # 4 bits (D)
+        return self
+
+    def execute(self, uvm: "UVM"):
+        left = uvm.memory[self.left_mem_addr]
+        right = uvm.regs[self.right_reg_addr]
+        uvm.regs[self.result_reg_addr] = left + right
+
+
+class _(Operation):
+    name = "jump"
+    op = 31
+    chk_reg_addr: int
+    jmp_mem_addr: int
+
+    def to_bytes(self) -> bytes:
+        word = 0
+        word |= self.op & 0b111111                     # A bits 0–5
+        word |= (self.chk_reg_addr & 0xF) << 6         # B bits 6–9 (4 bits)
+        word |= (self.jmp_mem_addr & 0x3FFFFFF) << 10  # C bits 10–35 (26 bits)
+        return word.to_bytes(5, "little")
+
+    def from_bytes(self, uvm: "UVM"):
+        word = uvm.get_word(5)
+        w = int.from_bytes(word, "little")
+        self.chk_reg_addr = (w >> 6) & 0xF       # 4 bits (B)
+        self.jmp_mem_addr = (w >> 10) & 0x3FFFFFF  # 26 bits (C)
+        return self
+
+    def execute(self, uvm: "UVM"):
+        v = uvm.regs[self.chk_reg_addr]
+        if v:
+            uvm.regs.pc = self.jmp_mem_addr
