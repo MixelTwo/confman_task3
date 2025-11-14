@@ -43,11 +43,21 @@ class Operation:
     def _args(self):
         return [v[0] for v in self.__annotations__.items() if v[1]]
 
+    def to_bytes(self) -> bytes:
+        raise NotImplementedError()
+
 
 class _(Operation):
     name = "load_const"
     value: int
     dest_addr: int
+
+    def to_bytes(self) -> bytes:
+        word = 0
+        word |= (43 & 0b111111)               # A: bits 0-5
+        word |= (self.value & 0xFFF) << 6     # B: bits 6-17 (12 bits)
+        word |= (self.dest_addr & 0xF) << 18  # C: bits 18-21 (4 bits)
+        return word.to_bytes(3, "little")
 
 
 class _(Operation):
@@ -55,11 +65,25 @@ class _(Operation):
     dest_addr: int
     src_addr: int
 
+    def to_bytes(self) -> bytes:
+        word = 0
+        word |= 60 & 0b111111                      # A bits 0–5
+        word |= (self.dest_addr & 0xF) << 6        # B bits 6–9
+        word |= (self.src_addr & 0x3FFFFFF) << 10  # C bits 10–35
+        return word.to_bytes(5, "little")
+
 
 class _(Operation):
     name = "write_mem"
     src_reg_addr: int
     dest_mem_reg_addr: int
+
+    def to_bytes(self) -> bytes:
+        word = 0
+        word |= 19 & 0b111111                         # A bits 0–5
+        word |= (self.src_reg_addr & 0xF) << 6        # B bits 6–9
+        word |= (self.dest_mem_reg_addr & 0xF) << 10  # C bits 10–13
+        return word.to_bytes(2, "little")
 
 
 class _(Operation):
@@ -68,3 +92,12 @@ class _(Operation):
     left_mem_addr: int
     right_reg_addr: int
     offset: int
+
+    def to_bytes(self) -> bytes:
+        word = 0
+        word |= 25 & 0b111111                           # A bits 0–5
+        word |= (self.result_base_reg_addr & 0xF) << 6  # B bits 6–9
+        word |= (self.left_mem_addr & 0x3FFFFFF) << 10  # C bits 10–35
+        word |= (self.right_reg_addr & 0xF) << 36       # D bits 36–39
+        word |= (self.offset & 0x7F) << 40              # E bits 40–46
+        return word.to_bytes(6, "little")

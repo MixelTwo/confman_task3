@@ -1,3 +1,4 @@
+import os
 from argparse import ArgumentParser
 
 import yaml
@@ -15,11 +16,18 @@ def main():
 
     try:
         source = load_source(args.source)
+        print(f"loaded from {args.source}")
+        result = [opr.to_bytes() for opr in source]
+
+        if args.test:
+            print("\n".join(f"{i}: {v.hex(" ")}" for i, v in enumerate(result)))
+        print(f"{len(result)} commands assembled")
+
+        save_output(args.output, result)
+        print(f"output to {args.output}")
     except Exception as x:
         print(x)
         return
-
-    print("\n".join(map(str, source)))
 
 
 def load_source(fname: str):
@@ -40,6 +48,15 @@ def load_source(fname: str):
         raise Exception("source wrong format:\n\t" + "\n\t".join(errors))
 
     return operations
+
+
+def save_output(fname: str, data: list[bytes]):
+    dirn = os.path.dirname(fname)
+    if dirn and not os.path.exists(dirn):
+        os.makedirs(dirn)
+    with open(fname, "wb") as f:
+        for b in data:
+            f.write(b)
 
 
 if __name__ == "__main__":

@@ -19,7 +19,7 @@
                 // "program": "${file}",
                 "program": "main.py",
                 "console": "integratedTerminal",
-                "args": ["-s", "test/prog1.yaml", "-o", "build/prog1"]
+                "args": ["-s", "test/prog1.yaml", "-o", "build/prog1", "-t"]
             }
         ]
     }
