@@ -1,0 +1,154 @@
+# write vector [2, 3, 4, 5, 6] to adress 160
+# write 2 to 160
+- op: load_const
+  value: 2
+  dest_addr: 1
+- op: load_const
+  value: 160
+  dest_addr: 2
+- op: write_mem
+  src_reg_addr: 1
+  dest_mem_reg_addr: 2
+# write 3 to 161
+- op: load_const
+  value: 3
+  dest_addr: 1
+- op: load_const
+  value: 161
+  dest_addr: 2
+- op: write_mem
+  src_reg_addr: 1
+  dest_mem_reg_addr: 2
+# write 4 to 162
+- op: load_const
+  value: 4
+  dest_addr: 1
+- op: load_const
+  value: 162
+  dest_addr: 2
+- op: write_mem
+  src_reg_addr: 1
+  dest_mem_reg_addr: 2
+# write 5 to 163
+- op: load_const
+  value: 5
+  dest_addr: 1
+- op: load_const
+  value: 163
+  dest_addr: 2
+- op: write_mem
+  src_reg_addr: 1
+  dest_mem_reg_addr: 2
+# write 6 to 164
+- op: load_const
+  value: 6
+  dest_addr: 1
+- op: load_const
+  value: 164
+  dest_addr: 2
+- op: write_mem
+  src_reg_addr: 1
+  dest_mem_reg_addr: 2
+
+
+# write vector [2, 2, 4, 4, 6] to adress 176
+# write 2 to 176
+- op: load_const
+  value: 2
+  dest_addr: 1
+- op: load_const
+  value: 176
+  dest_addr: 2
+- op: write_mem
+  src_reg_addr: 1
+  dest_mem_reg_addr: 2
+# write 2 to 177
+- op: load_const
+  value: 2
+  dest_addr: 1
+- op: load_const
+  value: 177
+  dest_addr: 2
+- op: write_mem
+  src_reg_addr: 1
+  dest_mem_reg_addr: 2
+# write 4 to 178
+- op: load_const
+  value: 4
+  dest_addr: 1
+- op: load_const
+  value: 178
+  dest_addr: 2
+- op: write_mem
+  src_reg_addr: 1
+  dest_mem_reg_addr: 2
+# write 4 to 179
+- op: load_const
+  value: 4
+  dest_addr: 1
+- op: load_const
+  value: 179
+  dest_addr: 2
+- op: write_mem
+  src_reg_addr: 1
+  dest_mem_reg_addr: 2
+# write 6 to 180
+- op: load_const
+  value: 6
+  dest_addr: 1
+- op: load_const
+  value: 180
+  dest_addr: 2
+- op: write_mem
+  src_reg_addr: 1
+  dest_mem_reg_addr: 2
+
+# compare vectors
+- op: load_const
+  value: 160
+  dest_addr: 2
+# compare adress 160 with adress 176
+- op: read_mem
+  dest_addr: 1
+  src_addr: 176
+- op: bin_eq
+  left_mem_addr: 160
+  right_reg_addr: 1
+  result_base_reg_addr: 2
+  offset: 0
+# compare adress 161 with adress 177
+- op: read_mem
+  dest_addr: 1
+  src_addr: 177
+- op: bin_eq
+  left_mem_addr: 161
+  right_reg_addr: 1
+  result_base_reg_addr: 2
+  offset: 1
+# compare adress 162 with adress 178
+- op: read_mem
+  dest_addr: 1
+  src_addr: 178
+- op: bin_eq
+  left_mem_addr: 162
+  right_reg_addr: 1
+  result_base_reg_addr: 2
+  offset: 2
+# compare adress 163 with adress 179
+- op: read_mem
+  dest_addr: 1
+  src_addr: 179
+- op: bin_eq
+  left_mem_addr: 163
+  right_reg_addr: 1
+  result_base_reg_addr: 2
+  offset: 3
+# compare adress 164 with adress 180
+- op: read_mem
+  dest_addr: 1
+  src_addr: 180
+- op: bin_eq
+  left_mem_addr: 164
+  right_reg_addr: 1
+  result_base_reg_addr: 2
+  offset: 4
