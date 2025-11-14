@@ -4,7 +4,7 @@ from os import path
 site_packages = next(p for p in sys.path if 'site-packages' in p)
 
 a = Analysis(
-    ['main.py'],
+    ['assembly.py'],
     pathex=[],
     binaries=[],
     datas=[("data", "data")],

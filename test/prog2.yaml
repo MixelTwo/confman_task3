@@ -1,0 +1,56 @@
+# copy 80-85 to 96-101
+
+# copy 80 to 96
+- op: load_const
+  value: 96
+  dest_addr: 1
+- op: read_mem
+  dest_addr: 2
+  src_addr: 80
+- op: write_mem
+  src_reg_addr: 2
+  dest_mem_reg_addr: 1
+
+# copy 81 to 97
+- op: load_const
+  value: 97
+  dest_addr: 1
+- op: read_mem
+  dest_addr: 2
+  src_addr: 81
+- op: write_mem
+  src_reg_addr: 2
+  dest_mem_reg_addr: 1
+
+# copy 82 to 98
+- op: load_const
+  value: 98
+  dest_addr: 1
+- op: read_mem
+  dest_addr: 2
+  src_addr: 82
+- op: write_mem
+  src_reg_addr: 2
+  dest_mem_reg_addr: 1
+
+# copy 83 to 99
+- op: load_const
+  value: 99
+  dest_addr: 1
+- op: read_mem
+  dest_addr: 2
+  src_addr: 83
+- op: write_mem
+  src_reg_addr: 2
+  dest_mem_reg_addr: 1
+
+# copy 84 to 100
+- op: load_const
+  value: 100
+  dest_addr: 1
+- op: read_mem
+  dest_addr: 2
+  src_addr: 84
+- op: write_mem
+  src_reg_addr: 2
+  dest_mem_reg_addr: 1
